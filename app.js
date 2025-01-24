@@ -11,9 +11,9 @@ app.use(express.urlencoded({ extended: true }))
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath))
 
-app.get("/", (req, res) => {
-    res.send("TESTING...")
-})
+const indexRouter = require("./routes/indexRouter")
+
+app.get("/", indexRouter)
 
 const PORT = 3000
 app.listen(PORT, "0.0.0.0", () => {
