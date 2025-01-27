@@ -1,5 +1,6 @@
 const { Render } = require("ejs")
 const db = require("../db/queries")
+const bcrypt = require("bcryptjs")
 
 async function signUpPageGet(req, res) {
     res.render("sign-up", {
@@ -13,7 +14,9 @@ async function signUpPagePost(req, res) {
     const username = req.body.username
     const password = req.body.password
 
-    await db.addUser(firstName, lastName, username, password)
+    const hashedPassword = await bcrypt.hash(password, 10)
+
+    await db.addUser(firstName, lastName, username, hashedPassword)
     res.redirect("/")
     return
 }
