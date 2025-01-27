@@ -12,8 +12,10 @@ const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath))
 
 const indexRouter = require("./routes/indexRouter")
+const signUpRouter = require("./routes/signUpRouter")
 
-app.get("/", indexRouter)
+app.use("/", indexRouter)
+app.use("/sign-up", signUpRouter)
 
 const PORT = 3000
 app.listen(PORT, "0.0.0.0", () => {
