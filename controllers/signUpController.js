@@ -12,9 +12,8 @@ async function signUpPagePost(req, res) {
     const lastName = req.body.lastName
     const username = req.body.username
     const password = req.body.password
-    const membershipStatus = "FALSE"
 
-    // db query here
+    await db.addUser(firstName, lastName, username, password)
     res.redirect("/")
     return
 }
