@@ -19,3 +19,7 @@ exports.addUser = async (firstName, lastName, username, password) => {
     await pool.query("INSERT INTO users (first_name, last_name, username, password, membership_status) VALUES ($1, $2, $3, $4, $5)", 
         [firstName, lastName, username, password, "FALSE"])
 }
+
+exports.addMember = async (user_id) => {
+    await pool.query("UPDATE users SET membership_status = true WHERE id = $1", [user_id])
+}
