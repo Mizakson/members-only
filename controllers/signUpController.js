@@ -1,6 +1,7 @@
 const { Render } = require("ejs")
 const db = require("../db/queries")
 const bcrypt = require("bcryptjs")
+const { body, validationResult } = require("express-validator")
 
 async function signUpPageGet(req, res) {
     res.render("sign-up", {
@@ -13,12 +14,24 @@ async function signUpPagePost(req, res) {
     const lastName = req.body.lastName
     const username = req.body.username
     const password = req.body.password
+    const confirmPassword = req.body.confirmPassword
 
-    const hashedPassword = await bcrypt.hash(password, 10)
+    console.log(password, confirmPassword)
 
-    await db.addUser(firstName, lastName, username, hashedPassword)
-    res.redirect("/")
-    return
+    if (password === confirmPassword) {
+        console.log("pw matches!")
+        const hashedPassword = await bcrypt.hash(password, 10)
+
+        await db.addUser(firstName, lastName, username, hashedPassword)
+        res.redirect("/")
+        return
+    } else {
+        console.log("PASSWORDS DON'T MATCH!")
+        res.send("PASSWORDS DON'T MATCH!")
+        return
+    }
+
+
 }
 
 module.exports = {
