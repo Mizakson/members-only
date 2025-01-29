@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+    </head>
+    <body>
+        <div class="title">
+            <h1><%= title %></h1>
+            <%- include("partials/pw-error.ejs") %>
+        </div>
+        <div class="content">
+            <!-- form here -->
+             <form action="" method="post">
+                <label for="firstName">First Name: </label>
+                <input type="text" id="firstName" name="firstName" placeholder="John" minlength="2" maxlength="75" required>
+
+                <label for="lastName">Last Name: </label>
+                <input type="text" id="lastName" name="lastName" placeholder="Doe" minlength="2" maxlength="75" required>
+
+                <label for="username">Username: </label>
+                <input type="text" name="username" id="username" minlength="6" maxlength="75" required>
+
+                <label for="password">Password: </label>
+                <input type="password" name="password" id="password" minlength="8" required>
+
+                <label for="confirmPassword">Confirm Password: </label>
+                <input type="password" name="confirmPassword" id="confirmPassword" minlength="8" required>
+
+                <button type="submit">Sign Up</button>
+             </form>
+             <div class="options">
+                <button><a href="/">Go Home</a></button>
+             </div>
+        </div>
+    </body>
+</html>
