@@ -1,6 +1,6 @@
 const pool = require("./pool")
 
-async function getAllUsers() {
+exports.getAllUsers = async () => {
     const { rows } = await pool.query("SELECT * FROM users")
     return rows
 }
@@ -15,12 +15,7 @@ async function getAllUsers() {
 //     return rows
 // }
 
-async function addUser(firstName, lastName, username, password) {
+exports.addUser = async (firstName, lastName, username, password) => {
     await pool.query("INSERT INTO users (first_name, last_name, username, password, membership_status) VALUES ($1, $2, $3, $4, $5)", 
         [firstName, lastName, username, password, "FALSE"])
-}
-
-module.exports = {
-    getAllUsers,
-    addUser,
 }
