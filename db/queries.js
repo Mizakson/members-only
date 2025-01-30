@@ -20,6 +20,11 @@ exports.addUser = async (firstName, lastName, username, password) => {
         [firstName, lastName, username, password, "FALSE"])
 }
 
+exports.getUserById = async (userId) => {
+    const { rows } = await pool.query("SELECT * FROM users WHERE user_id = $1", [userId])
+    return rows
+}
+
 exports.addMember = async (user_id) => {
     await pool.query("UPDATE users SET membership_status = true WHERE id = $1", [user_id])
 }
