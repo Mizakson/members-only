@@ -1,4 +1,5 @@
 const path = require("node:path");
+require("dotenv").config()
 const express = require("express");
 const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session)
@@ -7,8 +8,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require("bcryptjs")
 const app = express()
 const pool = require("./db/pool");
-
-require("dotenv").config()
 
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
@@ -23,7 +22,8 @@ app.use(session({
     }),
     secret: "yo", 
     resave: false, 
-    saveUninitialized: false 
+    saveUninitialized: false,
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000} // 30 days
 }));
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
