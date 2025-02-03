@@ -25,7 +25,9 @@ app.use((req, res, next) => {
   });
 
 const indexRouter = require("./routes/indexRouter")
-const signUpRouter = require("./routes/signUpRouter")
+const signUpRouter = require("./routes/signUpRouter");
+const logInRouter = require("./routes/loginRouter");
+const logOutRouter = require("./routes/logoutRouter");
 
 app.use("/", indexRouter)
 app.use("/sign-up", signUpRouter)
@@ -64,6 +66,9 @@ passport.deserializeUser(async (id, done) => {
       done(err);
     }
 });
+
+app.use("/log-in", logInRouter)
+app.use("/log-out", logOutRouter)
   
 const PORT = 3000
 app.listen(PORT, "0.0.0.0", () => {

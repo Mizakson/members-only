@@ -5,5 +5,5 @@ exports.indexPageGet = async (req, res) => {
     // query here
     const allUsers = await db.getAllUsers()
     console.log(allUsers)
-    res.send("HOMEPAGE...")
+    res.render("index", { user: req.user });
 }
