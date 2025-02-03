@@ -22,7 +22,7 @@ app.use(session({
     }),
     secret: "yo", 
     resave: false, 
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000} // 30 days
 }));
 app.use(passport.session());
