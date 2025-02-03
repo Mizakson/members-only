@@ -1,10 +1,12 @@
 const path = require("node:path");
 const express = require("express");
 const session = require("express-session");
+const pgSession = require("connect-pg-simple")(session)
 const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require("bcryptjs")
 const app = express()
+const pool = require("./db/pool");
 
 require("dotenv").config()
 
@@ -15,7 +17,14 @@ app.use(express.urlencoded({ extended: true }))
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath))
 
-app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
+app.use(session({
+    store: new (pgSession)({
+        pool: pool,
+    }),
+    secret: "yo", 
+    resave: false, 
+    saveUninitialized: false 
+}));
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
@@ -28,6 +37,7 @@ const indexRouter = require("./routes/indexRouter")
 const signUpRouter = require("./routes/signUpRouter");
 const logInRouter = require("./routes/loginRouter");
 const logOutRouter = require("./routes/logoutRouter");
+
 
 app.use("/", indexRouter)
 app.use("/sign-up", signUpRouter)
