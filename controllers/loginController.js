@@ -4,10 +4,17 @@ exports.logInGetReq = (req, res) => {
   res.render("login")
 }
 
-exports.logInPostReq = (req, res) => {
+exports.logInPostReq = () => {
     passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/", // incorrect login page here?
+      successRedirect: "/log-in-success",
+      failureRedirect: "/log-in-failure", // incorrect login page here?
     })
-    return
-}; 
+};
+
+exports.logInSuccessGetReq = (req, res) => {
+    res.render("login-success")
+}
+
+exports.logInFailureGetReq = (req, res) => {
+    res.render("login-failure")
+}

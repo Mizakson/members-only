@@ -27,6 +27,8 @@ app.use(session({
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
+require("./config/passport")
+
 app.use(indexRouter)
 
 const PORT = 3000

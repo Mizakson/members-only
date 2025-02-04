@@ -24,6 +24,7 @@ passport.use(
   
 passport.serializeUser((user, done) => {
     done(null, user.id);
+    return
 });
   
 passport.deserializeUser(async (id, done) => {
@@ -36,3 +37,5 @@ passport.deserializeUser(async (id, done) => {
       done(err);
     }
 });
+
+passport.authenticate(passport.session)
