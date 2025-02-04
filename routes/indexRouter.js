@@ -1,7 +1,12 @@
 const { Router } = require("express")
 const indexRouter = Router()
-const indexController = require("../controllers/indexController")
 
-indexRouter.get("/", indexController.indexPageGet)
+const { indexPageGet } = require("../controllers/indexController")
+const { signUpPageGet, signUpPagePost } = require("../controllers/signUpController")
+
+indexRouter.get("/", indexPageGet)
+indexRouter.get("/sign-up", signUpPageGet)
+
+indexRouter.post("/sign-up", signUpPagePost)
 
 module.exports = indexRouter
