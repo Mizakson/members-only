@@ -27,6 +27,8 @@ app.use(session({
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(indexRouter)
+
 const PORT = 3000
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`listening on http://localhost:${PORT}`)
