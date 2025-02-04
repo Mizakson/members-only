@@ -1,5 +1,6 @@
 const passport = require("passport")
 const LocalStrategy = require('passport-local').Strategy;
+const pool = require("../db/pool");
 
 passport.use(
     new LocalStrategy(async (username, password, done) => {

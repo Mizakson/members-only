@@ -3,6 +3,7 @@ require("dotenv").config()
 const express = require("express");
 const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session)
+const passport = require("passport")
 const pool = require("./db/pool");
 
 const app = express()
@@ -36,10 +37,10 @@ const signUpRouter = require("./routes/signUpRouter");
 const logInRouter = require("./routes/loginRouter");
 const logOutRouter = require("./routes/logoutRouter");
 
+require("./config/passport")
+
 app.use("/", indexRouter)
 app.use("/sign-up", signUpRouter)
-
-require("./config/passport")
 
 app.use("/log-in", logInRouter)
 app.use("/log-out", logOutRouter)
