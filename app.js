@@ -5,12 +5,12 @@ const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session)
 const passport = require("passport")
 const pool = require("./db/pool");
+const indexRouter = require("./routes/indexRouter");
 
 const app = express()
 
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
-app.use(express.urlencoded({ extended: true }))
 
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath))
@@ -27,24 +27,8 @@ app.use(session({
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
-app.use((req, res, next) => {
-    res.locals.currentUser = req.user;
-    next();
-  });
+app.use(indexRouter)
 
-const indexRouter = require("./routes/indexRouter")
-const signUpRouter = require("./routes/signUpRouter");
-const logInRouter = require("./routes/loginRouter");
-const logOutRouter = require("./routes/logoutRouter");
-
-require("./config/passport")
-
-app.use("/", indexRouter)
-app.use("/sign-up", signUpRouter)
-
-app.use("/log-in", logInRouter)
-app.use("/log-out", logOutRouter)
-  
 const PORT = 3000
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`listening on http://localhost:${PORT}`)
