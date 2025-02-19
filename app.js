@@ -5,7 +5,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const localStrategy = require("passport-local").Strategy;
 const pool = require("./db/pool");
-const queries = require("./db/queries");
+const db = require("./db/queries");
 const app = express();
 
 
@@ -59,12 +59,59 @@ passport.deserializeUser(async (id, done) => {
     } catch(err) {
         done(err);
     }
-})
+});
 
 
+// instantiate user for currentUser variable
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
 
-// requests here
+app.get("/", async (req, res) => {
+    const messages = await db.getUserMessages();
+    res.render("index", {
+        user: res.locals.currentUser,
+        messages: messages,
+    });
+});
 
+app.get("/sign-up", (req, res) => {
+    res.render("signup", { user: res.locals.currentUser, });
+});
+
+app.get("/login", (req, res) => {
+    res.render("login", { user: res.locals.currentUser, });
+});
+
+app.post("/login", passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/",
+}));
+
+app.get("/logout", (req, res, next) => {
+    req.logout((err) => {
+        if (err) return next(err);
+        res.redirect("/");
+    });
+});
+
+app.get("/member", (req, res) => {
+    res.render("member", { user: res.locals.currentUser, });
+});
+
+app.get("/add-message", (req, res) => {
+    res.render("addMessage", { user: res.locals.currentUser, });
+});
+
+app.get("/delete-message/:id", async (req, res) => {
+    const msgId = req.params.id;
+    await db.deleteMessage(messageId);
+    res.redirect("/");
+});
+
+app.use("/users", userRouter);
+app.use("/message", messageRouter);
 
 const PORT = 3000
 app.listen(PORT, "0.0.0.0", () => {
