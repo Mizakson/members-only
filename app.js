@@ -8,7 +8,8 @@ const pool = require("./db/pool");
 const queries = require("./db/queries");
 const app = express();
 
-// routers here
+const userRouter = require("./routes/userRouter");
+const messageRouter = require("./routes/messageRouter");
 
 
 app.set("view engine", "ejs");
