@@ -1,0 +1,13 @@
+<div class="nav">
+        <% if (user) { %> 
+            <div class="welcome">
+                <p>Welcome back, <%= user.firstname %>!</p>
+            </div>
+            <a href="/add-message">Create a message</a>
+            <a href="/member">Become a member</a>
+            <a href="/logout">Log out</a>
+        <% } else { %> 
+                <a href="/sign-up">Sign up</a>
+                <a href="/login">Log in</a>
+            <% } %>
+</div>
