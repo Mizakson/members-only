@@ -3,14 +3,14 @@ const pool = require("./pool")
 // status -- 0 (non-member), 1 (member), 2 (admin)
 
 exports.getAllUsers = async () => {
-    const { rows } = await pool.query("SELECT * FROM users")
-    return rows
-}
+    const { rows } = await pool.query("SELECT * FROM users");
+    return rows;
+};
 
-// async function getAllMessages() {
-//     const { rows } = await pool.query("SELECT * FROM messages")
-//     return rows
-// }
+// async function getAllMessages(username) {
+//     const { rows } = await pool.query("SELECT * FROM messages WHERE username = $1", [username]);
+//     return rows;
+// };
 
 // async function getAllMembers() {
 //     const { rows } = await pool.query("SELECT * FROM users WHERE membership_status = TRUE")
@@ -22,17 +22,17 @@ exports.addUser = async (firstName, lastName, username, password) => {
         [firstName, lastName, username, password, 0]);
 };
 
-exports.getUserById = async (userId) => {
-    const { rows } = await pool.query("SELECT * FROM users WHERE user_id = $1", [userId]);
+// exports.getUserById = async (userId) => {
+//     const { rows } = await pool.query("SELECT * FROM users WHERE user_id = $1", [userId]);
+//     return rows;
+// };
+
+exports.addMember = async (username) => {
+    const { rows } = await pool.query("UPDATE users SET membership_status = 1 WHERE username = $1", [username]);
     return rows;
 };
 
-exports.addMember = async (user_id) => {
-    const { rows } = await pool.query("UPDATE users SET membership_status = 1 WHERE id = $1", [user_id]);
-    return rows;
-};
-
-exports.makeMemberAdmin = async (user_id) => {
-    const { rows } = await pool.query("UPDATE users SET membership_status = 2 WHERE id = $1", [user_id]);
+exports.makeMemberAdmin = async (username) => {
+    const { rows } = await pool.query("UPDATE users SET membership_status = 2 WHERE username = $1", [username]);
     return rows;
 };
