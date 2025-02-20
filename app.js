@@ -63,16 +63,17 @@ passport.deserializeUser(async (id, done) => {
 
 
 // instantiate user for currentUser variable
-app.use((req, res, next) => {
-    res.locals.currentUser = req.user;
-    next();
-});
+// app.use((req, res, next) => {
+//     res.locals.currentUser = req.user;
+//     next();
+// });
 
-app.get("/", async (req, res) => {
-    const messages = await db.getUserMessages();
+// make async later
+app.get("/", (req, res) => {
+    // const messages = await db.getUserMessages();
     res.render("index", {
-        user: res.locals.currentUser,
-        messages: messages,
+        // user: res.locals.currentUser,
+        // messages: messages,
     });
 });
 
@@ -110,8 +111,8 @@ app.get("/delete-message/:id", async (req, res) => {
     res.redirect("/");
 });
 
-app.use("/users", userRouter);
-app.use("/message", messageRouter);
+// app.use("/users", userRouter);
+// app.use("/message", messageRouter);
 
 const PORT = 3000
 app.listen(PORT, "0.0.0.0", () => {
