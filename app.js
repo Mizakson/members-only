@@ -63,16 +63,16 @@ passport.deserializeUser(async (id, done) => {
 
 
 // instantiate user for currentUser variable
-// app.use((req, res, next) => {
-//     res.locals.currentUser = req.user;
-//     next();
-// });
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
 
 // make async later
 app.get("/", (req, res) => {
     // const messages = await db.getUserMessages();
     res.render("index", {
-        // user: res.locals.currentUser,
+        user: res.locals.currentUser,
         // messages: messages,
     });
 });
