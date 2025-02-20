@@ -47,7 +47,7 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user);
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -111,7 +111,7 @@ app.get("/delete-message/:id", async (req, res) => {
     res.redirect("/");
 });
 
-// app.use("/users", userRouter);
+app.use("/users", userRouter);
 // app.use("/message", messageRouter);
 
 const PORT = 3000
