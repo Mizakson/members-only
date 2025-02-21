@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add message</title>
+    </head>
+    <body>
+        <div class="gap"></div>
+        <form action="/message/add">
+            <!-- get user + user_id -->
+            <input type="hidden" name="user" value="<%= user ? user.user_id : '' %>">
+
+            <label for="title">Title: </label>
+            <input type="text" name="title" id="title">
+
+            <label for="message">Message: </label>
+            <textarea name="message" id="message" cols="150" rows="6"></textarea>
+
+            <button>Add</button>
+        </form>
+    </body>
+</html>
