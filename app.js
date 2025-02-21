@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
+const pgSession = require("connect-pg-simple")(session);
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const localStrategy = require("passport-local").Strategy;
@@ -18,6 +19,10 @@ app.use(express.static("public"));
 
 
 app.use(session({
+    store: new pgSession({
+        pool: pool,
+        tableName: 'session',
+    }),
     secret: "tacos",
     resave: false,
     saveUninitialized: false,
