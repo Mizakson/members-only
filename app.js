@@ -112,7 +112,7 @@ app.get("/delete-message/:id", async (req, res) => {
 });
 
 app.use("/users", userRouter);
-// app.use("/message", messageRouter);
+app.use("/message", messageRouter);
 
 const PORT = 3000
 app.listen(PORT, "0.0.0.0", () => {
