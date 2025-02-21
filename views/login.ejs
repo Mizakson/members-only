@@ -9,12 +9,17 @@
     </head>
     <body>
         <div class="form-container">
-            <form action="/login" method="post">
-                <label for="username">Username: </label>
-                <input type="text" name="username" id="username">
+            <h1>Login</h1>
+            <form action="/login" method="post" id="login-form">
+                <fieldset>
+                    <label for="username">Username: </label>
+                    <input type="text" name="username" id="username">
+                </fieldset>
 
-                <label for="password">Password: </label>
-                <input type="password" name="password" id="password">
+                <fieldset>
+                    <label for="password">Password: </label>
+                    <input type="password" name="password" id="password">
+                </fieldset>
 
                 <button>Log In</button>
             </form>

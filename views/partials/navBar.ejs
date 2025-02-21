@@ -3,11 +3,16 @@
             <div class="welcome">
                 <p>Welcome back, <%= user.first_name %>!</p>
             </div>
-            <a href="/add-message">Create a message</a>
-            <a href="/member">Become a member</a>
-            <a href="/logout">Log out</a>
+            <div class="links">
+                <a href="/add-message">Create a message</a>
+                <a href="/member">Become a member</a>
+                <a href="/logout">Log out</a>
+            </div>
+
         <% } else { %> 
+            <div class="links">
                 <a href="/sign-up">Sign up</a>
                 <a href="/login">Log in</a>
+            </div>
             <% } %>
 </div>

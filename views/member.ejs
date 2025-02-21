@@ -8,15 +8,21 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     </head>
     <body>
-        <%- include('partials/navBar.ejs', { user: user }) %>
-            <form action="/users/member" method="post">
-                <label for="secretCode">Guess the passcode!</label>
-                <input type="text" name="secretCode" id="secretCode" required>
-                <div class="btns">
-                    <button type="submit">Submit</button>
-                    <button><a href="/">Go Home</a></button>
-                </div>
-            </form>
+            <div class="form-container">
+                <h1>Become a member</h1>
+                <form action="/users/member" method="post" id="member-form">
+                    <fieldset>
+                        <label for="secretCode">Guess the passcode!</label>
+                        <input type="text" name="secretCode" id="secretCode" required>
+                    </fieldset>
+
+                    <div class="btns">
+                        <button type="submit">Submit</button>
+                        <button><a href="/">Go Home</a></button>
+                    </div>
+                </form>                
+            </div>
+
         </div>
     </body>
 </html>
