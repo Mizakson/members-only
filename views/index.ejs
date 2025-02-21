@@ -18,5 +18,24 @@
              <%- include('partials/navBar.ejs', { user: user }) %>
         </div>
         <!-- render messages here -->
+         <div class="messages">
+            <% messages.forEach(function(message) {%> 
+            <div class="message">
+                <!-- delete btn for admin -->
+                <% if (user != null && user.membership_status === 3) {%>
+                    <button>
+                        <a href="delete-message/<%= message.message_id %>">X</a>
+                    </button> 
+                <%} %>
+                <p class="message-title"><%= message.message_title %></p>
+                <!-- msg author and date for member -->
+                <% if (user != null && user.membership_status === 2) {%> 
+                <p>Author: <%= message.first_name%>  <%= message.last_name%></p>
+                <p>Date: <%= message.message_date %></p>
+                <%} %>
+                <p><%= message.message_text %></p>
+            </div>
+            <%}); %>
+         </div>
     </body>
 </html>

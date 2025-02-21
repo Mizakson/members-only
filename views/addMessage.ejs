@@ -5,7 +5,7 @@
     </head>
     <body>
         <div class="gap"></div>
-        <form action="/message/add">
+        <form action="/message/add" method="post">
             <!-- get user + user_id -->
             <input type="hidden" name="user" value="<%= user ? user.user_id : '' %>">
 

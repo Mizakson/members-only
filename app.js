@@ -68,12 +68,11 @@ app.use((req, res, next) => {
     next();
 });
 
-// make async later
-app.get("/", (req, res) => {
-    // const messages = await db.getUserMessages();
+app.get("/", async (req, res) => {
+    const messages = await db.getMessages();
     res.render("index", {
         user: res.locals.currentUser,
-        // messages: messages,
+        messages: messages,
     });
 });
 
