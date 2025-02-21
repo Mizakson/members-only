@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Become a member</title>
+    </head>
+    <body>
+        <%- include('partials/navBar.ejs', { user: user }) %>
+            <form action="/users/member" method="post">
+                <label for="secretCode">Guess the passcode!</label>
+                <input type="text" name="secretCode" id="secretCode" required>
+                <div class="btns">
+                    <button type="submit">Submit</button>
+                    <button><a href="/">Go Home</a></button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

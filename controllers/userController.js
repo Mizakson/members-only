@@ -28,7 +28,7 @@ exports.createNewUser = async (req, res) => {
 };
 
 exports.makeUserMember = async (req, res) => {
-    const username = req.locals.currentUser.username;
+    const username = res.locals.currentUser.username;
     const secretCode = req.body.secretCode;
 
     if (secretCode === process.env.MEMBER_SECRET_PASSWORD) {

@@ -29,21 +29,21 @@ exports.addUser = async (firstName, lastName, username, password) => {
 // };
 
 exports.addMember = async (username) => {
-    const { rows } = await pool.query("UPDATE users SET membership_status = 2 WHERE username = $1", [username]);
-    return rows;
+    const { rows } = await pool.query("UPDATE users SET membership_status = $1 WHERE username = $2", [Number(2) ,username]);
+    return rows[0];
 };
 
 exports.makeMemberAdmin = async (username) => {
-    const { rows } = await pool.query("UPDATE users SET membership_status = 3 WHERE username = $1", [username]);
-    return rows;
+    const { rows } = await pool.query("UPDATE users SET membership_status = $1 WHERE username = $2", [Number(3), username]);
+    return rows[0];
 };
 
 // queries for messages
 
 exports.addMessage = async (title, text, id) => {
     const result = await pool.query(`
-        INSERT INTO messages (message_title, message_text, user_id) VALUES ($1, $2, $3)
-        RETURNING *;`, [title, text, id]);
+        INSERT INTO messages (message_title, message_text, message_date, user_id) VALUES ($1, $2, $3, $4)
+        RETURNING *;`, [title, text, new Date(), id]);
     return result.rows[0];
 };
 

@@ -54,6 +54,7 @@ passport.deserializeUser(async (id, done) => {
     try {
         const { rows } = await pool.query("SELECT * FROM users WHERE user_id = $1", [id]);
         const user = rows[0];
+        console.log(user)
 
         done(null, user);
     } catch(err) {
@@ -106,7 +107,7 @@ app.get("/add-message", (req, res) => {
 
 app.get("/delete-message/:id", async (req, res) => {
     const msgId = req.params.id;
-    await db.deleteMessage(messageId);
+    await db.deleteMessage(msgId);
     res.redirect("/");
 });
 
