@@ -41,9 +41,10 @@ exports.makeMemberAdmin = async (username) => {
 // queries for messages
 
 exports.addMessage = async (title, text, id) => {
+    
     const result = await pool.query(`
-        INSERT INTO messages (message_title, message_text, message_date, user_id) VALUES ($1, $2, $3, $4)
-        RETURNING *;`, [title, text, new Date(), id]);
+        INSERT INTO messages (message_title, message_text, user_id) VALUES ($1, $2, $3)
+        RETURNING *;`, [title, text, id]);
     return result.rows[0];
 };
 
